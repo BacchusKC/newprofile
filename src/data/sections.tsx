@@ -46,8 +46,9 @@ export const sections: Section[] = [
                     <small>React, TypeScript, Hono, Postgres, Drizzle, Vercel</small>
                 </li>
                 <li>
-                    <a href="https://github.com/csinlasath/CMTT-Diet-Gopher">Diet Gopher</a>
-                    <span>Find food that fits your diet, then log and plan meals.</span>
+                    <a href="https://whatsplaying.live">What's Playing</a>
+                    <span>What's in theaters and on TV right now, with trailers, critic scores, and where to stream.</span>
+                    <small>React, TypeScript, TanStack Query, Vercel Functions</small>
                 </li>
                 <li>
                     <a href="https://github.com/BacchusKC/MegaMatch">Mega Match</a>
