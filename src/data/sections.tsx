@@ -52,7 +52,8 @@ export const sections: Section[] = [
                 </li>
                 <li>
                     <a href="https://github.com/BacchusKC/MegaMatch">Mega Match</a>
-                    <span>A React memory game starring the Robot Masters.</span>
+                    <span>A Mega Man memory game with two modes: classic card-flip matching, or never pick the same Robot Master twice.</span>
+                    <small>React, CSS Grid, localStorage, GitHub Pages</small>
                 </li>
             </ul>
         ),
