@@ -64,7 +64,7 @@ export const sections: Section[] = [
         body: (
             <ul className="contact">
                 <li>
-                    <a href="mailto:bacchuskc@gmail.com">bacchuskc@gmail.com</a>
+                    <a href="mailto:TravisMorrisKC@gmail.com">TravisMorrisKC@gmail.com</a>
                 </li>
                 <li>
                     <a href="https://github.com/BacchusKC">GitHub</a>
