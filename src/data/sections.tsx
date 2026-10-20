@@ -51,7 +51,7 @@ export const sections: Section[] = [
                     <small>React, TypeScript, TanStack Query, Vercel Functions</small>
                 </li>
                 <li>
-                    <a href="https://github.com/BacchusKC/MegaMatch">Mega Match</a>
+                    <a href="https://bacchuskc.github.io/MegaMatch/">Mega Match</a>
                     <span>A Mega Man memory game with two modes: classic card-flip matching, or never pick the same Robot Master twice.</span>
                     <small>React, CSS Grid, localStorage, GitHub Pages</small>
                 </li>
