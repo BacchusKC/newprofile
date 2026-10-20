@@ -12,6 +12,13 @@ const GlobalStyle = createGlobalStyle`
         --muted: #8f8b82;
         --rule: #2c2d31;
         --signal: #f5b52e;
+        --code-bg: #0b0c0d;
+        --code-ink: #d9d5cb;
+        --code-dim: #4d4c48;
+        --code-tag: #8fb8ff;
+        --code-key: #f5b52e;
+        --code-str: #a8d8a0;
+        --code-num: #e59a7a;
         --flip-ms: 60ms;
         color-scheme: dark;
     }
@@ -27,6 +34,13 @@ const GlobalStyle = createGlobalStyle`
         --muted: #625f58;
         --rule: #c6c2b8;
         --signal: #c9401a;
+        --code-bg: #f7f5ef;
+        --code-ink: #2a2b2e;
+        --code-dim: #aaa69c;
+        --code-tag: #2f5fa8;
+        --code-key: #b3471d;
+        --code-str: #3c7a3a;
+        --code-num: #8a4fb0;
         color-scheme: light;
     }
 

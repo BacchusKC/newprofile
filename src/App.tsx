@@ -1,4 +1,5 @@
-import styled, { keyframes } from "styled-components";
+import { useState } from "react";
+import styled from "styled-components";
 import GlobalStyle from "./styles/GlobalStyle";
 import Header from "./components/Header";
 import Board from "./components/Board";
@@ -33,6 +34,7 @@ const Screen = styled.div`
     inset: 0;
     display: grid;
     grid-template-rows: auto 1fr;
+    grid-template-columns: minmax(0, 1fr);
     padding-left: max(16px, env(safe-area-inset-left, 0px));
     padding-right: max(16px, env(safe-area-inset-right, 0px));
 `;
@@ -59,23 +61,31 @@ const Columns = styled.div`
     }
 `;
 
-const slideIn = keyframes`
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: none;
-    }
+const Stack = styled.div`
+    display: grid;
 `;
 
 const Content = styled.div`
+    grid-area: 1 / 1;
     max-width: 34rem;
-    animation: ${slideIn} 0.35s ease-out;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.35s ease-out, transform 0.35s ease-out, visibility 0s 0.35s;
+
+    &.showing {
+        visibility: visible;
+        opacity: 1;
+        transform: none;
+        transition: opacity 0.35s ease-out, transform 0.35s ease-out, visibility 0s;
+    }
 
     @media (prefers-reduced-motion: reduce) {
-        animation: none;
+        transition: none;
+
+        &.showing {
+            transition: none;
+        }
     }
 
     p {
@@ -129,6 +139,7 @@ export default function App() {
     const progress = useScrollProgress();
     const reducedMotion = useReducedMotion();
     const { theme, toggleTheme, wave } = useTheme(reducedMotion);
+    const [source, setSource] = useState(false);
 
     const { index, flip, current } = getStop(progress);
     const showing = sections[current];
@@ -138,20 +149,37 @@ export default function App() {
             <GlobalStyle />
             <ScrollSpace />
             <Screen>
-                <Header theme={theme} onToggleTheme={toggleTheme} wave={wave} still={reducedMotion} />
+                <Header
+                    theme={theme}
+                    onToggleTheme={toggleTheme}
+                    source={source}
+                    onToggleSource={() => setSource((on) => !on)}
+                    wave={wave}
+                    still={reducedMotion}
+                />
                 <Main>
                     <Board
                         from={sections[index]}
                         to={sections[index + 1]}
                         progress={flip}
                         showing={showing}
+                        source={source}
                         wave={wave}
                         still={reducedMotion}
                     />
                     <Columns>
-                        <Content key={showing.id} id={showing.id}>
-                            {showing.body}
-                        </Content>
+                        <Stack>
+                            {sections.map((section) => (
+                                <Content
+                                    key={section.id}
+                                    id={section.id}
+                                    className={section.id === showing.id ? "showing" : ""}
+                                    aria-hidden={section.id !== showing.id}
+                                >
+                                    {section.body}
+                                </Content>
+                            ))}
+                        </Stack>
                         <Schedule
                             sections={sections}
                             current={current}

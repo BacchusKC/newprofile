@@ -36,11 +36,41 @@ const Right = styled.div`
     display: flex;
     align-items: center;
     gap: 1rem;
+
+    @media (max-width: 520px) {
+        gap: 0.6rem;
+    }
 `;
 
 const Clock = styled.div`
     width: 5.2rem;
     --gap: 2px;
+`;
+
+const SourceButton = styled.button`
+    all: unset;
+    cursor: pointer;
+    padding: 0.35rem 0.8rem;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    font-family: "Barlow Condensed", sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--muted);
+
+    &[aria-pressed="true"] {
+        border-color: var(--signal);
+        color: var(--signal);
+    }
+
+    @media (max-width: 640px) {
+        display: none;
+    }
+
+    &:focus-visible {
+        outline: 3px solid var(--signal);
+        outline-offset: 3px;
+    }
 `;
 
 const Toggle = styled.button`
@@ -73,11 +103,13 @@ const Toggle = styled.button`
 type HeaderProps = {
     theme: Theme;
     onToggleTheme: (x: number, y: number) => void;
+    source: boolean;
+    onToggleSource: () => void;
     wave: number;
     still: boolean;
 };
 
-export default function Header({ theme, onToggleTheme, wave, still }: HeaderProps) {
+export default function Header({ theme, onToggleTheme, source, onToggleSource, wave, still }: HeaderProps) {
     const now = useClock();
     const time = formatTime(now);
 
@@ -91,6 +123,9 @@ export default function Header({ theme, onToggleTheme, wave, still }: HeaderProp
                 <Clock>
                     <FlapRow text={time} width={5} label={`Local time ${time}`} wave={wave} still={still} />
                 </Clock>
+                <SourceButton type="button" aria-pressed={source} onClick={onToggleSource}>
+                    &lt;/&gt; Source
+                </SourceButton>
                 <Toggle
                     type="button"
                     aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
